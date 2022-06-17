@@ -75,7 +75,12 @@ public class ArrayDeque<T> {
         if (index < 0 || (index + 1) > size() || isEmpty()) {
             return null;
         }
-        return items[index];
+        int p = plusOne(first);
+        while (index > 0) {
+            p = plusOne(p);
+            index -= 1;
+        }
+        return items[p];
     }
 
     /** Returns true if deque is empty, false otherwise. */
