@@ -113,7 +113,7 @@ public class ArrayDeque<T> {
 
     /** Returns true if usage(size / items.length) is too low(<=25%), false otherwise. */
     private boolean isUsageLow() {
-        return (size / items.length) <= 0.25;
+        return size > 16 && (size / items.length) <= 0.25;
     }
 
     /** If full, expand it to twice the size;
