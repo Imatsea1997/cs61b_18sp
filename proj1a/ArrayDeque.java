@@ -134,7 +134,7 @@ public class ArrayDeque<T> {
         items = newItems;
         //first和last是在newItems的位置，需要更新
         first = 0;
-        last = size + 1; //有元素的后一个空位置
+        last = plusOne(size); //有元素的后一个空位置
     }
 
     /** computed the index immediately “before” a given index. */

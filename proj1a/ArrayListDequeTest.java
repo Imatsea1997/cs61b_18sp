@@ -87,6 +87,15 @@ public class ArrayListDequeTest {
 
     }
 
+    public static void randomAddRemoveTest() {
+        System.out.println("Running random add/remove test.");
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        int N = 9;
+        for(int i = 0; i < N; i ++) {
+            ad1.addLast(i);
+        }
+    }
+
     /** test addLast */
     public static void addLastTest() {
         System.out.println("Running addLast test.");
@@ -111,12 +120,15 @@ public class ArrayListDequeTest {
         passed = checkItem(7, ad1.get(6)) && passed;
 
     }
+
+
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
         //addIsEmptySizeTest();
         //addRemoveTest();
         //下面是自己加的test
-        addGetTest();
+        //addGetTest();
         //addLastTest();
+        randomAddRemoveTest();
     }
 }
