@@ -17,6 +17,14 @@ public class ArrayListDequeTest {
         return true;
     }
 
+    public static boolean checkItem(Object expected, Object actual) {
+        if (!expected.equals(actual)) {
+            System.out.println("get() returned " + actual + ", but expected: " + expected);
+            return false;
+        }
+        return true;
+    }
+
     /* Prints a nice message based on whether a test passed.
      * The \n means newline. */
     public static void printTestStatus(boolean passed) {
@@ -79,15 +87,36 @@ public class ArrayListDequeTest {
 
     }
 
-    /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+    /** test addLast */
+    public static void addLastTest() {
+        System.out.println("Running addLast test.");
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        int N = 9;
+        for(int i = 0; i < N; i ++) {
+            ad1.addLast(i + 1);
+        }
+        ad1.printDeque();
+    }
+
+    /** Adds N-1 item, then get an item, and ensures that get the correct item */
     public static void addGetTest() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        // should be empty
+        boolean passed = checkEmpty(true, ad1.isEmpty());
+        int N = 10;
+
+        for(int i = 0; i < N - 1; i ++) {
+            ad1.addLast(i + 1);
+        }
+        passed = checkItem(7, ad1.get(6)) && passed;
 
     }
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
-        addIsEmptySizeTest();
-        addRemoveTest();
+        //addIsEmptySizeTest();
+        //addRemoveTest();
         //下面是自己加的test
         addGetTest();
+        //addLastTest();
     }
 }

@@ -12,7 +12,8 @@ public class ArrayDeque<T> {
     /** Creates an empty ArrayList deque. */
     public ArrayDeque() {
         items = (T[]) new Object[8];
-        first = last = 0;
+        first = 0;
+        last = 1;
         size = 0;
     }
 
@@ -127,10 +128,13 @@ public class ArrayDeque<T> {
         T[] newItems = (T[]) new Object[capacity];
         int p = plusOne(first);
         for (int i = 0; i < size; i ++) {
-            newItems[i] = items[p];
+            newItems[i + 1] = items[p];     //空出[0]的位置，让first指向这个空位置
             p = plusOne(p);
         }
         items = newItems;
+        //first和last是在newItems的位置，需要更新
+        first = 0;
+        last = size + 1; //有元素的后一个空位置
     }
 
     /** computed the index immediately “before” a given index. */
