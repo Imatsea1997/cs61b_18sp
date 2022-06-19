@@ -17,17 +17,6 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
-    /** easy way to create ArrayList deque with elements */
-    public void of(T... args) {
-        if (args.length <= 0) {
-            return;
-        }
-        int k;
-        for (k = 0; k < args.length; k += 1) {
-            addLast(args[k]);
-        }
-    }
-
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item) {
         if (isFull()) {
