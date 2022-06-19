@@ -3,20 +3,6 @@ import static org.junit.Assert.*;
 
 public class ArrayListDequeTest {
    @Test
-   public void testOf() {
-      ArrayDeque<Integer> actual = new ArrayDeque<>();
-      actual.of(1, 3, 2, 4, 5);
-      ArrayDeque<Integer> expected = new ArrayDeque<>();
-      expected.addLast(1);
-      expected.addLast(3);
-      expected.addLast(2);
-      expected.addLast(4);
-      expected.addLast(5);
-
-      assertArrayEquals(expected.items, actual.items);
-   }
-
-   @Test
    /** test basic condition(<=8 elements) add */
    public void testAdd() {
       ArrayDeque<Integer> input1 = new ArrayDeque<>();
@@ -146,6 +132,48 @@ public class ArrayListDequeTest {
 
       System.out.println("shrink Array: ");
       input2.printDeque();
+      System.out.println();
+   }
+
+   @Test
+   /** integration tests
+    * (expand) - 0(empty) - 19(expand) - 3(shrink)
+    * */
+   public void testFillupEmptyFillup() {
+      ArrayDeque<Integer> input1 = new ArrayDeque<>();
+      input1.of(1, 3, 2, 4, 5, 8, 7, 6, 9);
+      System.out.println("original Array: ");
+      input1.printDeque();
+      System.out.println();
+
+      input1.removeFirst();
+      input1.removeLast();
+      input1.removeFirst();
+      input1.removeLast();
+      input1.removeFirst();
+      input1.removeLast();
+      input1.removeFirst();
+      input1.removeFirst();
+      input1.removeFirst();
+      System.out.println("remove to 0: ");
+      input1.printDeque();
+      System.out.println();
+
+      int N = 19;
+      for (int i = 0; i < N; i += 1) {
+         input1.addLast((int) (Math.random() * 20));
+      }
+      System.out.println("expand to 19 size: ");
+      input1.printDeque();
+      System.out.println();
+
+      int delete = 8;
+      for (int i = 0; i < delete; i += 1) {
+         input1.removeFirst();
+         input1.removeLast();
+      }
+      System.out.println("shrink to 3 size: ");
+      input1.printDeque();
       System.out.println();
    }
 

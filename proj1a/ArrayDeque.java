@@ -4,7 +4,7 @@
  * 2. first指向第一个元素的前一个空位置。add:先添加元素，再往前移动；remove:先往后移动，再删除元素。
  * */
 public class ArrayDeque<T> {
-    public T[] items;
+    private T[] items;
     private int first;
     private int last;
     private int size;
@@ -35,7 +35,7 @@ public class ArrayDeque<T> {
         }
         items[first] = item;
         first = minusOne(first);
-        size += 1;
+        size += 1;                      //增加可以晚加，这样保持满空间，用时再扩容（eg.长期8/8）
     }
 
     /**  Adds an item of type T to the back of the deque. */
@@ -55,7 +55,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (isUsageLow()) {
-            resize(1 / 2 * items.length);
+            resize(items.length / 2);
         }
         first = plusOne(first);
         T firstItem = items[first];
@@ -71,7 +71,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (isUsageLow()) {
-            resize(1 / 2 * items.length);
+            resize(items.length / 2);
         }
         last = minusOne(last);
         T lastItem = items[last];
@@ -129,7 +129,8 @@ public class ArrayDeque<T> {
 
     /** Returns true if usage(size / items.length) is too low(<=25%), false otherwise. */
     private boolean isUsageLow() {
-        return size >= 16 && ((double)size / items.length) < 0.25;
+        //先降低size，再判断是否shrink。先shrink，防止大量空闲空间。(eg, 3/16长期保持）
+        return items.length >= 16 && ((double) (size - 1) / (double) items.length) < 0.25;
     }
 
     /** If full, expand it to twice the size;
