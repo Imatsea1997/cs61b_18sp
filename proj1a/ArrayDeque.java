@@ -1,10 +1,10 @@
 /**
- * 1. empty时，first和last均指向[0]，空元素
- * 2. 不是empty时，last指向最后一个元素的后一个空位置。先添加元素，再往后移动；先往前移动，再删除元素。
- * 3。 first指向第一个元素的前一个空位置。先添加元素，再往前移动；先往后移动，再删除元素。
+ *
+ * 1. last指向最后一个元素的后一个空位置。add:先添加元素，再往后移动；remove:先往前移动，再删除元素。
+ * 2. first指向第一个元素的前一个空位置。add:先添加元素，再往前移动；remove:先往后移动，再删除元素。
  * */
 public class ArrayDeque<T> {
-    private T[] items;
+    public T[] items;
     private int first;
     private int last;
     private int size;
@@ -15,6 +15,17 @@ public class ArrayDeque<T> {
         first = 0;
         last = 1;
         size = 0;
+    }
+
+    /** easy way to create ArrayList deque with elements */
+    public void of(T... args) {
+        if (args.length <= 0) {
+            return;
+        }
+        int k;
+        for (k = 0; k < args.length; k += 1) {
+            addLast(args[k]);
+        }
     }
 
     /** Adds an item of type T to the front of the deque. */
@@ -44,7 +55,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (isUsageLow()) {
-            resize(1/2 * items.length);
+            resize(1 / 2 * items.length);
         }
         first = plusOne(first);
         T firstItem = items[first];
@@ -60,7 +71,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (isUsageLow()) {
-            resize(1/2 * items.length);
+            resize(1 / 2 * items.length);
         }
         last = minusOne(last);
         T lastItem = items[last];
@@ -101,11 +112,10 @@ public class ArrayDeque<T> {
             return;
         }
         int p = plusOne(first);
-        for (int i = 0; i < size(); i ++) {
+        for (int i = 0; i < size(); i++) {
             if (i == 0) {
                 System.out.print(items[p]);
-            }
-            else {
+            } else {
                 System.out.print(" " + items[p]);
             }
             p = plusOne(p);
@@ -119,7 +129,7 @@ public class ArrayDeque<T> {
 
     /** Returns true if usage(size / items.length) is too low(<=25%), false otherwise. */
     private boolean isUsageLow() {
-        return size > 16 && (size / items.length) <= 0.25;
+        return size >= 16 && ((double)size / items.length) < 0.25;
     }
 
     /** If full, expand it to twice the size;
@@ -127,7 +137,7 @@ public class ArrayDeque<T> {
     private void resize(int capacity) {
         T[] newItems = (T[]) new Object[capacity];
         int p = plusOne(first);
-        for (int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             newItems[i + 1] = items[p];     //空出[0]的位置，让first指向这个空位置
             p = plusOne(p);
         }

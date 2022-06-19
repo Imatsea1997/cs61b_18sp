@@ -9,7 +9,7 @@ public class LinkedListDeque<T> {
         Node prev;
         Node next;
 
-        public Node(T t, Node p, Node n) {
+        Node(T t, Node p, Node n) {
             item = t;
             prev = p;
             next = n;
@@ -117,11 +117,10 @@ public class LinkedListDeque<T> {
             return;
         }
         Node p = sentinel.next;
-        for (int i = 0; i < size(); i ++) {
+        for (int i = 0; i < size(); i++) {
             if (i == 0) {
                 System.out.print(p.item);
-            }
-            else {
+            } else {
                 System.out.print(" " + p.item);
             }
             p = p.next;
