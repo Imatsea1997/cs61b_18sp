@@ -18,47 +18,49 @@ public class TestPalindrome {
 
     @Test
     public void testIsPalindrome() {
+        Palindrome p = new Palindrome();
         //normal:True
         String input1 = "abcde";
-        boolean actual1 = Palindrome.isPalindrome(input1);
+        boolean actual1 = p.isPalindrome(input1);
         assertFalse(actual1);
 
         //normal:False
         String input2 = "aaa";
-        boolean actual2 = Palindrome.isPalindrome(input2);
+        boolean actual2 = p.isPalindrome(input2);
         assertTrue(actual2);
 
         //special case1: one element
         String input3 = "a";
-        boolean actual3 = Palindrome.isPalindrome(input3);
+        boolean actual3 = p.isPalindrome(input3);
         assertTrue(actual3);
 
         //special case2: 0 element
         String input4 = "";
-        boolean actual4 = Palindrome.isPalindrome(input4);
+        boolean actual4 = p.isPalindrome(input4);
         assertTrue(actual4);
     }
 
     @Test
     /** test Palindrome.isPalindrome(string, Cc) */
     public void testCustomizedIsPalindrome() {
+        Palindrome p = new Palindrome();
         /* special case: 0 or 1 element */
-        String s1= "";
+        String s1 = "";
         String s2 = "a";
         CharacterComparator offByOne = new OffByOne();
-        boolean actual1 = Palindrome.isPalindrome(s1, offByOne);
-        boolean actual2 = Palindrome.isPalindrome(s2, offByOne);
+        boolean actual1 = p.isPalindrome(s1, offByOne);
+        boolean actual2 = p.isPalindrome(s2, offByOne);
         assertTrue(actual1);
         assertTrue(actual2);
 
         /* normal case: true */
         String s3 = "acedb";
-        boolean actual3 = Palindrome.isPalindrome(s3, offByOne);
+        boolean actual3 = p.isPalindrome(s3, offByOne);
         assertTrue(actual3);
 
         /* normal case: false */
         String s4 = "aceedb";
-        boolean actual4 = Palindrome.isPalindrome(s4, offByOne);
+        boolean actual4 = p.isPalindrome(s4, offByOne);
         assertFalse(actual4);
     }
 
