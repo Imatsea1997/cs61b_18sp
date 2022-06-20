@@ -19,6 +19,7 @@ public class Palindrome {
         return true;
     }
 
+    /* 和上一个函数只差一行，冗余。 */
     public boolean isPalindrome(String word, CharacterComparator cc) {
         if (word.length() <= 1) {
             return true;

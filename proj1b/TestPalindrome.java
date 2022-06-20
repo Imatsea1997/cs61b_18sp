@@ -18,50 +18,41 @@ public class TestPalindrome {
 
     @Test
     public void testIsPalindrome() {
-        Palindrome p = new Palindrome();
-        //normal:True
-        String input1 = "abcde";
-        boolean actual1 = p.isPalindrome(input1);
-        assertFalse(actual1);
+        //Checking empty string case
+        assertTrue(palindrome.isPalindrome(""));
 
-        //normal:False
-        String input2 = "aaa";
-        boolean actual2 = p.isPalindrome(input2);
-        assertTrue(actual2);
+        //Checking length 1 string case
+        assertTrue(palindrome.isPalindrome("a"));
+        assertTrue(palindrome.isPalindrome("Z"));
 
-        //special case1: one element
-        String input3 = "a";
-        boolean actual3 = p.isPalindrome(input3);
-        assertTrue(actual3);
+        //Checking true statements
+        assertTrue(palindrome.isPalindrome("mom"));
+        assertTrue(palindrome.isPalindrome("repaper"));
+        assertTrue(palindrome.isPalindrome("deified"));
 
-        //special case2: 0 element
-        String input4 = "";
-        boolean actual4 = p.isPalindrome(input4);
-        assertTrue(actual4);
+        //Checking false statements
+        assertFalse(palindrome.isPalindrome("cat"));
+        assertFalse(palindrome.isPalindrome("awesome"));
+        assertFalse(palindrome.isPalindrome("clock"));
     }
 
     @Test
     /** test Palindrome.isPalindrome(string, Cc) */
     public void testCustomizedIsPalindrome() {
-        Palindrome p = new Palindrome();
-        /* special case: 0 or 1 element */
-        String s1 = "";
-        String s2 = "a";
-        CharacterComparator offByOne = new OffByOne();
-        boolean actual1 = p.isPalindrome(s1, offByOne);
-        boolean actual2 = p.isPalindrome(s2, offByOne);
-        assertTrue(actual1);
-        assertTrue(actual2);
+        //Checking empty string case
+        OffByOne test = new OffByOne();
 
-        /* normal case: true */
-        String s3 = "acedb";
-        boolean actual3 = p.isPalindrome(s3, offByOne);
-        assertTrue(actual3);
+        assertTrue(palindrome.isPalindrome("", test));
 
-        /* normal case: false */
-        String s4 = "aceedb";
-        boolean actual4 = p.isPalindrome(s4, offByOne);
-        assertFalse(actual4);
+        //Checking length 1 string case
+        assertTrue(palindrome.isPalindrome("a", test));
+        assertTrue(palindrome.isPalindrome("Z", test));
+
+        //Checking true statements
+        assertTrue(palindrome.isPalindrome("flake", test));
+
+        //Checking false statements
+        assertFalse(palindrome.isPalindrome("awesome", test));
     }
 
 }
